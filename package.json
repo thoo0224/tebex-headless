@@ -1,10 +1,10 @@
 {
-	"name": "tebex-headless",
+	"name": "@thoo0224/tebex-headless",
 	"version": "0.0.0",
 	"description": "Unofficial API wrapper for the Tebex Headless API",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/thoo0224/tebex-headless"
+		"url": "git+https://github.com/thoo0224/tebex-headless.git"
 	},
 	"scripts": {
 		"test": "jest",
