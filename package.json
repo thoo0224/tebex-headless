@@ -7,6 +7,9 @@
 		"type": "git",
 		"url": "git+https://github.com/thoo0224/tebex-headless.git"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"test": "jest",
 		"build": "tsc"
