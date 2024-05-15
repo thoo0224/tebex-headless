@@ -48,7 +48,7 @@ export class TebexHeadlessClient {
       axiosInstance,
       webstoreIdentifier,
       `${BASE_URL}/api/accounts/${webstoreIdentifier}`,
-      `${BASE_URL}/api/basket/${webstoreIdentifier}`
+      `${BASE_URL}/api/baskets/${webstoreIdentifier}`
     );
 
     this.packages = new PackagesService(this);
