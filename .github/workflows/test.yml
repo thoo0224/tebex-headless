@@ -1,6 +1,8 @@
 name: Test
 on:
   push:
+    branches:
+      - "**"
 
 permissions:
   contents: read
@@ -29,5 +31,5 @@ jobs:
         run: npm audit signatures
       - name: Test
         run: pnpm test
-          env:
-            WEBSTORE_IDENTIFIER: ${{ secrets.WEBSTORE_IDENTIFIER }}
+        env:
+          WEBSTORE_IDENTIFIER: ${{ secrets.WEBSTORE_IDENTIFIER }}
