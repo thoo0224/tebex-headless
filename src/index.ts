@@ -3,6 +3,7 @@ import { PackagesService } from "./services";
 import { TebexErrorResponse } from "./types";
 import { transformKeys } from "./utils";
 import { CategoriesService } from "./services/categories";
+import { WesbtoreService } from "./services/webstore";
 
 const BASE_URL = "https://headless.tebex.io";
 
@@ -28,6 +29,7 @@ export class TebexHeadlessClient {
 
   public readonly packages: PackagesService;
   public readonly categories: CategoriesService;
+  public readonly webstore: WesbtoreService;
 
   constructor(webstoreIdentifier: string) {
     const axiosInstance = axios.create({
@@ -47,6 +49,7 @@ export class TebexHeadlessClient {
 
     this.packages = new PackagesService(this);
     this.categories = new CategoriesService(this);
+    this.webstore = new WesbtoreService(this);
   }
 
   public async handleResponse<R>(response: AxiosResponse): Promise<R> {

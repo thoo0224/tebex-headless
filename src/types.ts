@@ -43,3 +43,15 @@ export type Package = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Webstore = {
+  id: number;
+  description: string;
+  name: string;
+  webstoreUrl: string;
+  currency: string;
+  lang: string;
+  logo: string | null;
+  platformType: string;
+  createdAt: string;
+};
