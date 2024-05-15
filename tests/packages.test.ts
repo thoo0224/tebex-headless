@@ -5,6 +5,25 @@ import { Package } from "../src/types";
 
 const client = new TebexHeadlessClient(process.env.WEBSTORE_IDENTIFIER!);
 
+const packageKeys = [
+  "id",
+  "name",
+  "description",
+  "image",
+  "type",
+  "category",
+  "basePrice",
+  "salesTax",
+  "totalPrice",
+  "currency",
+  "discount",
+  "disableQuantity",
+  "disableGifting",
+  "expirationDate",
+  "createdAt",
+  "updatedAt",
+];
+
 describe("PackagesService", () => {
   let packages: Package[];
 
@@ -18,24 +37,7 @@ describe("PackagesService", () => {
 
     packages.forEach((package_) => {
       expect(package_).toBeDefined();
-      expect(package_).toContainKeys([
-        "id",
-        "name",
-        "description",
-        "image",
-        "type",
-        "category",
-        "basePrice",
-        "salesTax",
-        "totalPrice",
-        "currency",
-        "discount",
-        "disableQuantity",
-        "disableGifting",
-        "expirationDate",
-        "createdAt",
-        "updatedAt",
-      ]);
+      expect(package_).toContainKeys(packageKeys);
     });
   });
 
@@ -45,23 +47,6 @@ describe("PackagesService", () => {
 
     const package_ = await client.packages.getPackage(pkg.id);
     expect(package_).toBeDefined();
-    expect(package_).toContainKeys([
-      "id",
-      "name",
-      "description",
-      "image",
-      "type",
-      "category",
-      "basePrice",
-      "salesTax",
-      "totalPrice",
-      "currency",
-      "discount",
-      "disableQuantity",
-      "disableGifting",
-      "expirationDate",
-      "createdAt",
-      "updatedAt",
-    ]);
+    expect(package_).toContainKeys(packageKeys);
   });
 });
