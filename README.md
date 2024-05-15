@@ -19,7 +19,7 @@
 ## Progress
 
 - [x] Categories
-- [ ] Coupons
+- [x] Coupons
 - [ ] Gift Cards
 - [ ] Creator Codes
 - [x] Packages
