@@ -1,16 +1,14 @@
-import { ClientContext } from "..";
-import { BaseResponse, Package } from "../types";
-import { transformKeys } from "../utils";
+import { TebexHeadlessClient } from "..";
+import { Package } from "../types";
 
 export class PackagesService {
-  constructor(private readonly context: ClientContext) {}
+  constructor(private readonly client: TebexHeadlessClient) {}
 
-  public async getPackages(): Promise<any> {
-    const response = await this.context.axios.get<BaseResponse<Package[]>>(
-      `${this.context.accountsEndpoint}/packages`
+  public async getPackages(): Promise<Package[]> {
+    const response = await this.client.context.axios.get(
+      `${this.client.context.accountsEndpoint}/packages`
     );
 
-    const data = response.data.data;
-    return transformKeys(data);
+    return this.client.handleResponseError(response);
   }
 }

@@ -2,6 +2,16 @@ export type BaseResponse<T> = {
   data: T;
 };
 
+export type TebexErrorResponse = {
+  status: number;
+  type: string;
+  title: string;
+  detail: string;
+  errorCode: string;
+  fieldDetails: string[];
+  meta: string[];
+};
+
 export type Package = {
   id: number;
   name: string;
