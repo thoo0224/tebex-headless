@@ -11,4 +11,12 @@ export class PackagesService {
 
     return this.client.handleResponseError(response);
   }
+
+  public async getPackage(id: Package["id"]): Promise<Package> {
+    const response = await this.client.context.axios.get(
+      `${this.client.context.accountsEndpoint}/packages/${id}`
+    );
+
+    return this.client.handleResponseError(response);
+  }
 }
