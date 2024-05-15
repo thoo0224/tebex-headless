@@ -44,6 +44,46 @@ export type Package = {
   updatedAt: string;
 };
 
+export type Coupon = {
+  code: string;
+};
+
+export type Giftcard = {
+  cardNumber: string;
+};
+
+export type Basket = {
+  id: number;
+  ident: string;
+  complete: boolean;
+  country: string;
+  ip: string;
+  usernameId: string;
+  username: string;
+  basePrice: number;
+  salesTax: number;
+  totalPrice: number;
+  currency: string;
+  discount: number;
+  disableQuantity: boolean;
+  disableGifting: boolean;
+  expirationDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+  packages: Package[];
+  coupons: Coupon[];
+  giftcards: Giftcard[];
+  creatorCode: string;
+  links: {
+    checkout: string;
+  };
+};
+
+export type BasketAuthUrl = {
+  name: string;
+  url: string;
+};
+
 export type Webstore = {
   id: number;
   description: string;
