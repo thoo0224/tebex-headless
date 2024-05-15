@@ -1,5 +1,5 @@
 import { TebexHeadlessClient } from "..";
-import { Basket, BasketAuthUrl } from "../types";
+import { Basket, BasketAuthUrl, Package } from "../types";
 
 export class BasketService {
   constructor(private readonly client: TebexHeadlessClient) {}
@@ -69,6 +69,13 @@ export class BasketService {
     return this.client.handleResponse(response);
   }
 
+  /**
+   * Get the auth url for a basket
+   *
+   * @param ident The basket identifier
+   * @param returnUrl The return url
+   * @returns The auth urls
+   */
   public async getBasketAuthUrl(
     ident: string,
     returnUrl: string
@@ -83,5 +90,92 @@ export class BasketService {
     );
 
     return this.client.handleResponse(response, false);
+  }
+
+  /**
+   * Add a package to a basket
+   *
+   * @param ident The basket identifier
+   * @param packageId The package identifier
+   * @param quantity The quantity
+   * @param variables The variables
+   * @returns The updated basket
+   */
+  public async addPackage(
+    ident: string,
+    packageId: Package["id"],
+    quantity: number = 1,
+    variables?: any
+  ): Promise<Basket> {
+    const response = await this.client.context.axios.post(
+      `${this.client.context.basketsEndpoint}/${ident}/packages`,
+      {
+        package_id: packageId,
+        quantity: quantity,
+        variables_data: variables,
+      }
+    );
+
+    return this.client.handleResponse(response);
+  }
+
+  /**
+   * Gift a package to a user
+   *
+   * @param ident The basket identifier
+   * @param packageId The package identifier
+   * @param targetUsernameId The target username id
+   * @returns The updated basket
+   */
+  public async giftPackage(
+    ident: string,
+    packageId: Package["id"],
+    targetUsernameId: string
+  ): Promise<Basket> {
+    const response = await this.client.context.axios.post(
+      `${this.client.context.basketsEndpoint}/${ident}/packages`,
+      {
+        package_id: packageId,
+        target_username_id: targetUsernameId,
+      }
+    );
+
+    return this.client.handleResponse(response);
+  }
+
+  /**
+   * Remove a package from a basket
+   *
+   * @param ident The basket identifier
+   * @param packageId The package identifier
+   * @returns The updated basket
+   */
+  public async removePackage(
+    ident: string,
+    packageId: Package["id"]
+  ): Promise<Basket> {
+    const response = await this.client.context.axios.post(
+      `${this.client.context.basketsEndpoint}/${ident}/packages`,
+      {
+        package_id: packageId,
+      }
+    );
+
+    return this.client.handleResponse(response);
+  }
+
+  public async updateQuantity(
+    ident: string,
+    packageId: Package["id"],
+    quantity: number
+  ): Promise<Basket> {
+    const response = await this.client.context.axios.post(
+      `${this.client.context.basketsEndpoint}/${ident}/packages/${packageId}`,
+      {
+        quantity: quantity,
+      }
+    );
+
+    return this.client.handleResponse(response);
   }
 }

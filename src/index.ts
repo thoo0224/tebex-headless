@@ -11,9 +11,12 @@ import { transformKeys } from "./utils";
 const BASE_URL = "https://headless.tebex.io";
 
 export class TebexError extends Error {
-  constructor(public readonly response: TebexErrorResponse) {
+  constructor(
+    public readonly response: TebexErrorResponse,
+    public readonly status: number
+  ) {
     super(
-      `received error from Tebex: ${response.title} (status ${response.status})`
+      `received error from Tebex: ${response.title}; ${response.detail} (status ${status})`
     );
   }
 }
@@ -48,7 +51,7 @@ export class TebexHeadlessClient {
       axiosInstance,
       webstoreIdentifier,
       `${BASE_URL}/api/accounts/${webstoreIdentifier}`,
-      `${BASE_URL}/api/baskets/${webstoreIdentifier}`
+      `${BASE_URL}/api/baskets`
     );
 
     this.packages = new PackagesService(this);
@@ -62,8 +65,10 @@ export class TebexHeadlessClient {
     withData: boolean = true
   ): Promise<R> {
     const data = response.data;
-    if (response.status !== 200) {
-      throw new TebexError(data);
+    const status = response.status;
+
+    if (status !== 200) {
+      throw new TebexError(data, status);
     }
 
     return transformKeys(withData ? data.data : data);

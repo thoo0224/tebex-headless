@@ -1,5 +1,5 @@
 import { TebexHeadlessClient } from "../src";
-import { Basket } from "../src/types";
+import { Basket, Package } from "../src/types";
 
 import "jest-extended";
 
@@ -27,9 +27,14 @@ const basketAuthUrlKeys = ["name", "url"];
 
 describe("BasketService", () => {
   let createdBasket: Basket;
+  let packages: Package[];
 
   beforeAll(async () => {
     createdBasket = await client.basket.createBasket();
+  });
+
+  beforeAll(async () => {
+    packages = await client.packages.getPackages();
   });
 
   it("should create a basket", async () => {
