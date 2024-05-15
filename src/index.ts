@@ -1,16 +1,23 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { PackagesService } from "./services";
+import {
+  CategoriesService,
+  PackagesService,
+  WesbtoreService,
+  BasketService,
+  CouponsService,
+} from "./services";
 import { TebexErrorResponse } from "./types";
 import { transformKeys } from "./utils";
-import { CategoriesService } from "./services/categories";
-import { WesbtoreService } from "./services/webstore";
 
 const BASE_URL = "https://headless.tebex.io";
 
 export class TebexError extends Error {
-  constructor(public readonly response: TebexErrorResponse) {
+  constructor(
+    public readonly response: TebexErrorResponse,
+    public readonly status: number
+  ) {
     super(
-      `received error from Tebex: ${response.title} (status ${response.status})`
+      `received error from Tebex: ${response.title}; ${response.detail} (status ${status})`
     );
   }
 }
@@ -30,6 +37,8 @@ export class TebexHeadlessClient {
   public readonly packages: PackagesService;
   public readonly categories: CategoriesService;
   public readonly webstore: WesbtoreService;
+  public readonly basket: BasketService;
+  public readonly coupons: CouponsService;
 
   constructor(webstoreIdentifier: string) {
     const axiosInstance = axios.create({
@@ -44,20 +53,27 @@ export class TebexHeadlessClient {
       axiosInstance,
       webstoreIdentifier,
       `${BASE_URL}/api/accounts/${webstoreIdentifier}`,
-      `${BASE_URL}/api/basket/${webstoreIdentifier}`
+      `${BASE_URL}/api/baskets`
     );
 
     this.packages = new PackagesService(this);
     this.categories = new CategoriesService(this);
     this.webstore = new WesbtoreService(this);
+    this.basket = new BasketService(this);
+    this.coupons = new CouponsService(this);
   }
 
-  public async handleResponse<R>(response: AxiosResponse): Promise<R> {
+  public async handleResponse<R>(
+    response: AxiosResponse,
+    withData: boolean = true
+  ): Promise<R> {
     const data = response.data;
-    if (response.status !== 200) {
-      throw new TebexError(data);
+    const status = response.status;
+
+    if (status !== 200) {
+      throw new TebexError(data, status);
     }
 
-    return transformKeys(data.data);
+    return transformKeys(withData ? data.data : data);
   }
 }

@@ -19,12 +19,12 @@
 ## Progress
 
 - [x] Categories
-- [ ] Coupons
+- [x] Coupons
 - [ ] Gift Cards
 - [ ] Creator Codes
 - [x] Packages
-- [ ] Basket
-- [ ] Basket Packages
+- [x] Basket
+- [x] Basket Packages
 - [x] Webstores
 
 ## Install
