@@ -1,0 +1,30 @@
+{
+  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+  "extends": [
+    "eslint:recommended", // Use the recommended rules from ESLint
+    "plugin:@typescript-eslint/eslint-recommended", // Disables ESLint rules that conflict with TypeScript
+    "plugin:@typescript-eslint/recommended" // Use recommended rules from @typescript-eslint/eslint-plugin
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "env": {
+    "node": true, // Enable Node.js global variables
+    "es6": true // Enable ES6 global variables
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ], // Warn on unused variables except those starting with _
+    "no-empty-function": "off", // Turn off ESLint's no-empty-function
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      { "allow": ["constructors"] }
+    ], // Allow empty constructors
+    "indent": ["error", 2], // 2 spaces for indentation
+    "quotes": ["error", "double"], // Use double quotes
+    "semi": ["error", "always"] // Require semicolons
+  }
+}
