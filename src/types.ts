@@ -2,6 +2,26 @@ export type BaseResponse<T> = {
   data: T;
 };
 
+export type TebexErrorResponse = {
+  status: number;
+  type: string;
+  title: string;
+  detail: string;
+  errorCode: string;
+  fieldDetails: string[];
+  meta: string[];
+};
+
+export type Category = {
+  id: number;
+  name: string;
+  description: string;
+  parent: Category | null;
+  order: number;
+  packages: Package[];
+  displayType: "grid" | "list";
+};
+
 export type Package = {
   id: number;
   name: string;
@@ -22,4 +42,16 @@ export type Package = {
   expirationDate: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type Webstore = {
+  id: number;
+  description: string;
+  name: string;
+  webstoreUrl: string;
+  currency: string;
+  lang: string;
+  logo: string | null;
+  platformType: string;
+  createdAt: string;
 };
