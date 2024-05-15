@@ -44,6 +44,10 @@ export type Package = {
   updatedAt: string;
 };
 
+export type CouponResponse = {
+  message: string;
+};
+
 export type Coupon = {
   code: string;
 };

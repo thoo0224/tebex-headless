@@ -4,6 +4,7 @@ import {
   PackagesService,
   WesbtoreService,
   BasketService,
+  CouponsService,
 } from "./services";
 import { TebexErrorResponse } from "./types";
 import { transformKeys } from "./utils";
@@ -37,6 +38,7 @@ export class TebexHeadlessClient {
   public readonly categories: CategoriesService;
   public readonly webstore: WesbtoreService;
   public readonly basket: BasketService;
+  public readonly coupons: CouponsService;
 
   constructor(webstoreIdentifier: string) {
     const axiosInstance = axios.create({
@@ -58,6 +60,7 @@ export class TebexHeadlessClient {
     this.categories = new CategoriesService(this);
     this.webstore = new WesbtoreService(this);
     this.basket = new BasketService(this);
+    this.coupons = new CouponsService(this);
   }
 
   public async handleResponse<R>(
