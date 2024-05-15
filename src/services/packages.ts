@@ -9,7 +9,7 @@ export class PackagesService {
       `${this.client.context.accountsEndpoint}/packages`
     );
 
-    return this.client.handleResponseError(response);
+    return this.client.handleResponse(response);
   }
 
   public async getPackage(id: Package["id"]): Promise<Package> {
@@ -17,6 +17,6 @@ export class PackagesService {
       `${this.client.context.accountsEndpoint}/packages/${id}`
     );
 
-    return this.client.handleResponseError(response);
+    return this.client.handleResponse(response);
   }
 }

@@ -45,7 +45,7 @@ export class TebexHeadlessClient {
     this.packages = new PackagesService(this);
   }
 
-  public async handleResponseError<R>(response: AxiosResponse): Promise<R> {
+  public async handleResponse<R>(response: AxiosResponse): Promise<R> {
     const data = response.data;
     if (response.status !== 200) {
       throw new TebexError(data);

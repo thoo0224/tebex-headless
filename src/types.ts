@@ -12,6 +12,16 @@ export type TebexErrorResponse = {
   meta: string[];
 };
 
+export type Category = {
+  id: number;
+  name: string;
+  description: string;
+  parent: Category | null;
+  order: number;
+  packages: Package[];
+  displayType: "grid" | "list";
+};
+
 export type Package = {
   id: number;
   name: string;
