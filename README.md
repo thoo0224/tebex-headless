@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to @thoo0224/tebex-headless 👋</h1>
+<h1 align="center">@thoo0224/tebex-headless (WIP)</h1>
 <p>
   <a href="https://www.npmjs.com/package/@thoo0224/tebex-headless" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/@thoo0224/tebex-headless.svg">
@@ -15,6 +15,17 @@
 </p>
 
 > Unofficial API wrapper for the Tebex Headless API
+
+## Progress
+
+- [x] Categories
+- [ ] Coupons
+- [ ] Gift Cards
+- [ ] Creator Codes
+- [x] Packages
+- [ ] Basket
+- [ ] Basket Packages
+- [x] Webstores
 
 ## Install
 
