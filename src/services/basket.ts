@@ -25,7 +25,7 @@ export class BasketService {
    * @param options.ipAddress An IPv4 address can be provided with authenticated requests
    * @returns The created basket
    */
-  public async createBasket(options?: {
+  public async createBasket(completeUrl: string, cancelUrl: string, options?: {
     ipCountry?: string;
     ipAddress?: string;
   }): Promise<Basket> {
@@ -33,6 +33,8 @@ export class BasketService {
       `${this.client.context.accountsEndpoint}/baskets`,
       {
         ip_address: options?.ipAddress,
+        complete_url: completeUrl,
+        cancel_url: cancelUrl,
       },
       {
         headers: {
